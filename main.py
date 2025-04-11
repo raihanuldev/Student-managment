@@ -7,3 +7,11 @@ class StudentDatabase:
     def add_student(cls,student):
         cls._student_list.append(student) 
         
+# create studebnt class
+class Student:
+    def __init__(self,student_id,name,department,is_enrolled):
+        self.__student_id = student_id
+        self._name = name
+        self._department = department
+        self._is_enrolled = is_enrolled
+        
