@@ -8,6 +8,12 @@ class StudentDatabase:
         cls._student_list.append(student)
 
     @classmethod
+    def remove_student(cls, student):
+        """Remove student from the student list"""
+        if student in cls._student_list:
+            cls._student_list.remove(student)
+
+    @classmethod
     def view_all_students(cls):
         """View all students in the database"""
         if not cls._student_list:
@@ -42,7 +48,8 @@ class Student:
     def drop_student(self):
         """Drop the student if they are enrolled."""
         if self._is_enrolled:
-            self._is_enrolled = False
+            # Remove the student from the database
+            StudentDatabase.remove_student(self)
             print(f"🛑 Student {self._name} has been dropped.")
         else:
             print(f"⚠️ Student {self._name} is already not enrolled.")
@@ -84,7 +91,7 @@ def menu():
                 name = input("Enter Student Name: ")
                 department = input("Enter Department: ")
                 # Create a new student and add to the database
-                new_student = Student(student_id, name, department)
+                new_student = Student(student_id, name, department, is_enrolled=True)  # New student is enrolled
                 print(f"✅ New student {name} successfully added!")
 
         elif choice == "3":
